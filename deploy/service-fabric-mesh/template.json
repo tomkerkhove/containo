@@ -38,7 +38,7 @@
         },
         "Region": {
             "type": "string",
-            "defaultValue": "westeurope",
+            "defaultValue": "eastus",
             "metadata": {
                 "description": "Region in which the resources will be deployed"
             }
@@ -83,7 +83,7 @@
                             "codePackages": [
                                 {
                                     "name": "Containo.Orders.API",
-                                    "image": "tomkerkhove/containo-orders-api",
+                                    "image": "hello-world:linux",
                                     "endpoints": [
                                         {
                                             "name": "HTTP-Public",
@@ -109,7 +109,7 @@
                                 },
                                 {
                                     "name": "Containo.Orders.Cache",
-                                    "image": "redis",
+                                    "image": "redis:4.0",
                                     "endpoints": [],
                                     "environmentVariables": [],
                                     "resources": {
@@ -136,7 +136,7 @@
                             "codePackages": [
                                 {
                                     "name": "Containo.Orders.QueueProcessor",
-                                    "image": "tomkerkhove/containo-orders-queue-processor",
+                                    "image": "hello-world:linux",
                                     "endpoints": [],
                                     "environmentVariables": [
                                         {
