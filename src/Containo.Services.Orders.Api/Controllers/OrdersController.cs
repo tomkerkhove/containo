@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Containo.Services.Orders.Api.Contracts;
 using Containo.Services.Orders.Api.Contracts.v1;
+using Containo.Services.Orders.Contracts.Messaging.v1;
+using Containo.Services.Orders.Contracts.Storage;
+using Containo.Services.Orders.Storage;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
@@ -12,35 +14,40 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Containo.Services.Orders.Api.Controllers
 {
-    [Route(template: "api/orders")]
+    [Route(template: "api")]
     public class OrdersController : Controller
     {
         private static readonly Dictionary<string, OrderRequest> orders = new Dictionary<string, OrderRequest>();
+        private readonly OrdersRepository ordersRepository = new OrdersRepository();
 
         /// <summary>
         ///     Provides details about an order that was made
         /// </summary>
+        /// <param name="customerName">Customer making the order</param>
         /// <param name="confirmationId">Id of the confirmation when the order was made</param>
-        [Route(template: "{confirmationId}")]
+        [Route(template: "{customerName}/orders/{confirmationId}")]
         [HttpGet]
-        [SwaggerResponse((int) HttpStatusCode.OK, description: "Information about the order")]
-        [SwaggerResponse((int) HttpStatusCode.NotFound, description: "Order was not found")]
-        public IActionResult Get(string confirmationId)
+        [SwaggerResponse((int)HttpStatusCode.OK, description: "Information about the order", type: typeof(OrderConfirmation))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, description: "Order was not found")]
+        public async Task<IActionResult> Get(string customerName, string confirmationId)
         {
-            if (orders.ContainsKey(confirmationId))
+            var order = await ordersRepository.GetAsync(customerName, confirmationId);
+            if (order == null)
             {
-                var order = orders[confirmationId];
-                return Ok(order);
+                return NotFound();
             }
 
-            return NotFound();
+            var orderConfirmation = MapOrderToOrderConfirmation(order);
+
+            return Ok(orderConfirmation);
         }
 
         /// <summary>
         ///     Provides details about an order that was made
         /// </summary>
+        [Route(template: "orders")]
         [HttpPost]
-        [SwaggerResponse((int) HttpStatusCode.Created, description: "Information about the order", type: typeof(OrderConfirmation))]
+        [SwaggerResponse((int)HttpStatusCode.Created, description: "Information about the order", type: typeof(OrderConfirmation))]
         public async Task<IActionResult> Post([FromBody] OrderRequest orderRequest)
         {
             var confirmationId = Guid.NewGuid().ToString();
@@ -55,6 +62,22 @@ namespace Containo.Services.Orders.Api.Controllers
             orders.Add(confirmationId, orderRequest);
 
             return Created($"/orders/{orderConfirmation.ConfirmationId}", orderConfirmation);
+        }
+
+        private OrderConfirmation MapOrderToOrderConfirmation(OrderRecord order)
+        {
+            var orderConfirmation = new OrderConfirmation
+            {
+                ConfirmationId = order.ConfirmationId,
+                Order = new OrderRequest
+                {
+                    Amount = order.Amount,
+                    CustomerName = order.CustomerName,
+                    ProductId = order.ProductId
+                }
+            };
+
+            return orderConfirmation;
         }
 
         private async Task QueueOrderAsync(string confirmationId, OrderRequest order)
@@ -73,7 +96,7 @@ namespace Containo.Services.Orders.Api.Controllers
                 CorrelationId = Guid.NewGuid().ToString()
             };
 
-            var connectionString = Environment.GetEnvironmentVariable(variable: "Orders_ConnectionString");
+            var connectionString = Environment.GetEnvironmentVariable(variable: "ServiceBus_ConnectionString");
             var queueName = Environment.GetEnvironmentVariable(variable: "Orders_Queue_Name");
             var queueClient = new QueueClient(connectionString, queueName);
             await queueClient.SendAsync(message);

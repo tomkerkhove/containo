@@ -1,12 +1,21 @@
-﻿using System;
+﻿using System.Threading.Tasks;
+using Containo.Services.Orders.Contracts.Messaging.v1;
+using Containo.Services.Orders.Storage;
 
 namespace Containo.Services.Orders.QueueProcessor
 {
-    class Program
+    public class Program : MessagePump<OrderMessage>
     {
-        static void Main(string[] args)
+        private readonly OrdersRepository ordersRepository = new OrdersRepository();
+        protected override async Task ProcessMessageAsync(string correlationId, string cycleId, OrderMessage message)
         {
-            Console.WriteLine("Hello World!");
+            await ordersRepository.StoreAsync(message.CustomerName, message.ConfirmationId, message.ProductId, message.Amount);
+        }
+
+        private static async Task Main(string[] args)
+        {
+            var messagePump = new Program();
+            await messagePump.ReceiveMessagesAsync();
         }
     }
 }

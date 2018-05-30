@@ -4,10 +4,11 @@
         <name>Containo.Services.Orders.Api</name>
     </assembly>
     <members>
-        <member name="M:Containo.Services.Orders.Api.Controllers.OrdersController.Get(System.String)">
+        <member name="M:Containo.Services.Orders.Api.Controllers.OrdersController.Get(System.String,System.String)">
             <summary>
                 Provides details about an order that was made
             </summary>
+            <param name="customerName">Customer making the order</param>
             <param name="confirmationId">Id of the confirmation when the order was made</param>
         </member>
         <member name="M:Containo.Services.Orders.Api.Controllers.OrdersController.Post(Containo.Services.Orders.Api.Contracts.v1.OrderRequest)">

@@ -1,4 +1,4 @@
-﻿namespace Containo.Services.Orders.Api.Contracts
+﻿namespace Containo.Services.Orders.Contracts.Messaging.v1
 {
     public class OrderMessage
     {

@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Containo.Services.Orders.Contracts\Containo.Services.Orders.Contracts.csproj" />
+    <ProjectReference Include="..\Containo.Services.Orders.Storage\Containo.Services.Orders.Storage.csproj" />
   </ItemGroup>
 
   <ItemGroup>
