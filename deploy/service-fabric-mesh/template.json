@@ -106,6 +106,18 @@
                                             "memoryInGB": 1
                                         }
                                     }
+                                },
+                                {
+                                    "name": "Containo.Orders.Cache",
+                                    "image": "redis/redis",
+                                    "endpoints": [],
+                                    "environmentVariables": [],
+                                    "resources": {
+                                        "requests": {
+                                            "cpu": 1,
+                                            "memoryInGB": 1
+                                        }
+                                    }
                                 }
                             ],
                             "replicaCount": 1,
