@@ -109,7 +109,7 @@
                                 },
                                 {
                                     "name": "Containo.Orders.Cache",
-                                    "image": "redis/redis",
+                                    "image": "redis",
                                     "endpoints": [],
                                     "environmentVariables": [],
                                     "resources": {
