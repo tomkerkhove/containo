@@ -1,0 +1,159 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "Application.Name": {
+            "type": "string",
+            "defaultValue": "Containo.Orders",
+            "metadata": {
+                "description": "Name of the Service Fabric Application"
+            }
+        },
+        "Application.Description": {
+            "type": "string",
+            "defaultValue": "Application that is used to create orders",
+            "metadata": {
+                "description": "Description of the Service Fabric Application"
+            }
+        },
+        "Application.Network.Name": {
+            "type": "string",
+            "defaultValue": "Containo.Network",
+            "metadata": {
+                "description": "Name of network to use in which your Service Fabric Application will be"
+            }
+        },
+        "Application.Queues.Name": {
+            "type": "string",
+            "defaultValue": "orders",
+            "metadata": {
+                "description": "Name of network the queue that will be used for creating orders"
+            }
+        },
+        "ServiceBus.ConnectionString": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Connection string to the Service Bus Namespace"
+            }
+        },
+        "Region": {
+            "type": "string",
+            "defaultValue": "westeurope",
+            "metadata": {
+                "description": "Region in which the resources will be deployed"
+            }
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2018-03-01-privatepreview",
+            "name": "[parameters('Application.Network.Name')]",
+            "type": "Microsoft.ServiceFabric/networks",
+            "location": "[parameters('Region')]",
+            "dependsOn": [],
+            "properties": {
+                "description": "Private network for Containo",
+                "addressPrefix": "10.0.0.4/22",
+                "ingressConfig": {
+                    "qosLevel": "bronze",
+                    "layer4": [
+                        {
+                            "publicPort": "80",
+                            "applicationName": "[parameters('Application.Name')]",
+                            "serviceName": "Containo.Orders.API",
+                            "endpointName": "Containo.Orders.API"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "2018-03-01-privatepreview",
+            "name": "Containo.Orders",
+            "type": "Microsoft.ServiceFabric/applications",
+            "location": "[parameters('Region')]",
+            "properties": {
+                "description": "[parameters('Application.Description')]",
+                "services": [
+                    {
+                        "name": "Containo.Orders.API",
+                        "properties": {
+                            "description": "Containo Orders API",
+                            "osType": "linux",
+                            "codePackages": [
+                                {
+                                    "name": "Containo.Orders.API",
+                                    "image": "tomkerkhove/containo-orders-api",
+                                    "endpoints": [
+                                        {
+                                            "name": "HTTP-Public",
+                                            "port": 80
+                                        }
+                                    ],
+                                    "environmentVariables": [
+                                        {
+                                            "name": "Orders_Queue_Name",
+                                            "value": "[parameters('Application.Queues.Name')]"
+                                        },
+                                        {
+                                            "name": "Orders_ConnectionString",
+                                            "value": "[parameters('ServiceBus.ConnectionString')]"
+                                        }
+                                    ],
+                                    "resources": {
+                                        "requests": {
+                                            "cpu": 1,
+                                            "memoryInGB": 1
+                                        }
+                                    }
+                                }
+                            ],
+                            "replicaCount": 1,
+                            "networkRefs": [
+                                {
+                                    "name": "[resourceId('Microsoft.ServiceFabric/networks', parameters('Application.Network.Name'))]"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Containo.Orders.QueueProcessor",
+                        "properties": {
+                            "description": "Queue processor that will handle the order messages",
+                            "osType": "linux",
+                            "codePackages": [
+                                {
+                                    "name": "Containo.Orders.QueueProcessor",
+                                    "image": "tomkerkhove/containo-orders-queue-processor",
+                                    "endpoints": [],
+                                    "environmentVariables": [
+                                        {
+                                            "name": "Orders_Queue_Name",
+                                            "value": "[parameters('Application.Queues.Name')]"
+                                        },
+                                        {
+                                            "name": "Orders_ConnectionString",
+                                            "value": "[parameters('ServiceBus.ConnectionString')]"
+                                        }
+                                    ],
+                                    "resources": {
+                                        "requests": {
+                                            "cpu": 1,
+                                            "memoryInGB": 1
+                                        }
+                                    }
+                                }
+                            ],
+                            "replicaCount": 1,
+                            "networkRefs": [
+                                {
+                                    "name": "[resourceId('Microsoft.ServiceFabric/networks', parameters('Application.Network.Name'))]"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
