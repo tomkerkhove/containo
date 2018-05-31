@@ -83,7 +83,7 @@
                             "codePackages": [
                                 {
                                     "name": "Containo.Orders.API",
-                                    "image": "hello-world:linux",
+                                    "image": "tomkerkhove/containo.services.orders.api",
                                     "endpoints": [
                                         {
                                             "name": "HTTP-Public",
@@ -140,7 +140,7 @@
                             "codePackages": [
                                 {
                                     "name": "Containo.Orders.QueueProcessor",
-                                    "image": "hello-world:linux",
+                                    "image": "tomkerkhove/containo.services.orders.queueprocessor:dev",
                                     "endpoints": [],
                                     "environmentVariables": [
                                         {
