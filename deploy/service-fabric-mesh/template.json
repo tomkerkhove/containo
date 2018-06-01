@@ -36,6 +36,12 @@
                 "description": "Connection string to the Service Bus Namespace"
             }
         },
+        "TableStorage.ConnectionString": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Connection string to Azure Storage"
+            }
+        },
         "Region": {
             "type": "string",
             "defaultValue": "eastus",
@@ -83,11 +89,11 @@
                             "codePackages": [
                                 {
                                     "name": "Containo.Orders.API",
-                                    "image": "tomkerkhove/containo.services.orders.api",
+                                    "image": "tomkerkhove/containo.services.orders.api:dev",
                                     "endpoints": [
                                         {
                                             "name": "HTTP-Public",
-                                            "port": 80
+                                            "port": 8999
                                         }
                                     ],
                                     "environmentVariables": [
@@ -101,7 +107,7 @@
                                         },
                                         {
                                             "name": "TableStorage_ConnectionString",
-                                            "value": "[parameters('ServiceBus.ConnectionString')]"
+                                            "value": "[parameters('TableStorage.ConnectionString')]"
                                         }
                                     ],
                                     "resources": {
@@ -153,7 +159,7 @@
                                         },
                                         {
                                             "name": "TableStorage_ConnectionString",
-                                            "value": "[parameters('ServiceBus.ConnectionString')]"
+                                            "value": "[parameters('TableStorage.ConnectionString')]"
                                         }
                                     ],
                                     "resources": {
