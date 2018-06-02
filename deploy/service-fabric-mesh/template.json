@@ -16,6 +16,13 @@
                 "description": "Description of the Service Fabric Application"
             }
         },
+        "Application.Environment": {
+            "type": "string",
+            "defaultValue": "Development",
+            "metadata": {
+                "description": "Environment in which the application is running"
+            }
+        },
         "Application.Network.Name": {
             "type": "string",
             "defaultValue": "Containo.Network",
@@ -98,6 +105,10 @@
                                     ],
                                     "environmentVariables": [
                                         {
+                                            "name": "ASPNETCORE_ENVIRONMENT",
+                                            "value": "[parameters('Application.Environment')]"
+                                        },
+                                        {
                                             "name": "Orders_Queue_Name",
                                             "value": "[parameters('Application.Queues.Name')]"
                                         },
@@ -149,6 +160,10 @@
                                     "image": "tomkerkhove/containo.services.orders.queueprocessor:dev",
                                     "endpoints": [],
                                     "environmentVariables": [
+                                        {
+                                            "name": "ASPNETCORE_ENVIRONMENT",
+                                            "value": "[parameters('Application.Environment')]"
+                                        },
                                         {
                                             "name": "Orders_Queue_Name",
                                             "value": "[parameters('Application.Queues.Name')]"
