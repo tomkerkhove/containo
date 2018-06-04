@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
-    <Configurations>Debug;Release;Travis-CI</Configurations>
+    <DockerComposeProjectPath>..\src\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -16,7 +15,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
-    <PackageReference Include="Microsoft.Azure.ServiceBus" Version="3.0.1.16" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
   </ItemGroup>
 
@@ -26,14 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Containo.Core.Api\Containo.Core.Api.csproj" />
-    <ProjectReference Include="..\Containo.Services.Orders.Contracts\Containo.Services.Orders.Contracts.csproj" />
-    <ProjectReference Include="..\Containo.Services.Orders.Storage\Containo.Services.Orders.Storage.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Docs\Open-Api.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\Containo.Core.Api\Containo.Core.Api.csproj" />
   </ItemGroup>
 
 </Project>

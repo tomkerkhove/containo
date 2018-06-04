@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Containo.Services.Orders.Validator</name>
+    </assembly>
+    <members>
+        <member name="M:Containo.Services.Orders.Validator.Controllers.ValidationController.Get(System.String,System.Int32)">
+            <summary>
+                Validates an order
+            </summary>
+            <param name="tenantName">Name of the tenant</param>
+            <param name="amount">Amount of products bought</param>
+        </member>
+    </members>
+</doc>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace Containo.Services.Orders.Api.Extensions
+namespace Containo.Core.Api.Extensions
 {
     public static class IApplicationBuilderExtensions
     {

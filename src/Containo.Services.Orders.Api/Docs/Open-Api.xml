@@ -16,13 +16,5 @@
                 Provides details about an order that was made
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Containo.Services.Orders.Api.Extensions.IApplicationBuilderExtensions.UseOpenApiUi(Microsoft.AspNetCore.Builder.IApplicationBuilder)" -->
-        <member name="M:Containo.Services.Orders.Api.Extensions.IServiceCollectionExtensions.UseOpenApiSpecifications(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Int32)">
-            <summary>
-                Use OpenAPI specification
-            </summary>
-            <param name="services">Collections of services in application</param>
-            <param name="apiVersion">Version of the API</param>
-        </member>
     </members>
 </doc>

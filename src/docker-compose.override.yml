@@ -7,3 +7,10 @@ services:
     ports:
       - "80"
 
+
+  containo.services.orders.validator:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+
