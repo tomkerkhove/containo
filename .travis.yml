@@ -2,8 +2,8 @@ language: csharp
 dotnet: 2.0.0
 dist: trusty
 script:
-- dotnet restore src/Containo.sln
-- dotnet build src/Containo.sln
+- dotnet restore src/Containo.sln -c Travis-CI
+- dotnet build src/Containo.sln -c Travis-CI
 branches:
   only:
   - master
