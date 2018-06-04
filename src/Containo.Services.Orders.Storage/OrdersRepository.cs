@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Containo.Services.Orders.Contracts.Storage;
+using Containo.Services.Orders.Storage.Contracts.v1;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 

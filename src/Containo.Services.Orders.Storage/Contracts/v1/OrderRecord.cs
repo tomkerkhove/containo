@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.WindowsAzure.Storage.Table;
 
-namespace Containo.Services.Orders.Contracts.Storage
+namespace Containo.Services.Orders.Storage.Contracts.v1
 {
     public class OrderRecord : TableEntity
     {
