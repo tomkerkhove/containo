@@ -1,0 +1,13 @@
+language: csharp
+dotnet: 2.0.0
+dist: trusty
+script:
+- dotnet restore src/Containo.sln
+- dotnet build src/Containo.sln
+branches:
+  only:
+  - master
+notifications:
+  email:
+    on_success: never
+    on_failure: always
