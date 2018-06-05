@@ -119,6 +119,10 @@
                                         {
                                             "name": "TableStorage_ConnectionString",
                                             "value": "[parameters('TableStorage.ConnectionString')]"
+                                        },
+                                        {
+                                            "name": "Redis_ConnectionString",
+                                            "value": "localhost:6379"
                                         }
                                     ],
                                     "resources": {
@@ -131,7 +135,11 @@
                                 {
                                     "name": "Containo.Orders.Cache",
                                     "image": "redis:4.0",
-                                    "endpoints": [],
+                                    "endpoints": [
+                                        {
+                                            "name": "Redis",
+                                            "port": 6379
+                                        }],
                                     "environmentVariables": [],
                                     "resources": {
                                         "requests": {
