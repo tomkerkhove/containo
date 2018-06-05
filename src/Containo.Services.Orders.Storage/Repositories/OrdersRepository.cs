@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Containo.Services.Orders.Storage.Contracts.v1;
+using Containo.Services.Orders.Storage.Repositories.Interfaces;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 
-namespace Containo.Services.Orders.Storage
+namespace Containo.Services.Orders.Storage.Repositories
 {
-    public class OrdersRepository
+    public class OrdersRepository : IReadOrdersRepository, IWriteOrdersRepository
     {
         private readonly CloudTable ordersTable;
 

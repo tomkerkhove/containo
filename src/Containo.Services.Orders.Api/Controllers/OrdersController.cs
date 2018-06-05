@@ -7,6 +7,7 @@ using Containo.Services.Orders.Api.Contracts.v1;
 using Containo.Services.Orders.Contracts.Messaging.v1;
 using Containo.Services.Orders.Storage;
 using Containo.Services.Orders.Storage.Contracts.v1;
+using Containo.Services.Orders.Storage.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;

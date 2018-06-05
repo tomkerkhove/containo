@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Containo.Services.Orders.Contracts.Messaging.v1;
 using Containo.Services.Orders.Storage;
+using Containo.Services.Orders.Storage.Repositories;
 
 namespace Containo.Services.Orders.QueueProcessor
 {
