@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Containo.Services.Orders.Api.Contracts.v1;
 using Containo.Services.Orders.Contracts.Messaging.v1;
-using Containo.Services.Orders.Storage;
 using Containo.Services.Orders.Storage.Contracts.v1;
-using Containo.Services.Orders.Storage.Repositories;
+using Containo.Services.Orders.Storage.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
@@ -15,21 +14,27 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Containo.Services.Orders.Api.Controllers
 {
-    [Route(template: "api")]
+    [Route("api")]
     public class OrdersController : Controller
     {
         private static readonly Dictionary<string, OrderRequest> orders = new Dictionary<string, OrderRequest>();
-        private readonly OrdersRepository ordersRepository = new OrdersRepository();
+        private readonly ICachedReadOrdersRepository ordersRepository;
+
+        public OrdersController(ICachedReadOrdersRepository ordersRepository)
+        {
+            this.ordersRepository = ordersRepository;
+        }
 
         /// <summary>
         ///     Provides details about an order that was made
         /// </summary>
         /// <param name="customerName">Customer making the order</param>
         /// <param name="confirmationId">Id of the confirmation when the order was made</param>
-        [Route(template: "{customerName}/orders/{confirmationId}")]
+        [Route("{customerName}/orders/{confirmationId}")]
         [HttpGet]
-        [SwaggerResponse((int)HttpStatusCode.OK, description: "Information about the order", type: typeof(OrderConfirmation))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound, description: "Order was not found")]
+        [SwaggerResponse((int) HttpStatusCode.OK, description: "Information about the order",
+            type: typeof(OrderConfirmation))]
+        [SwaggerResponse((int) HttpStatusCode.NotFound, description: "Order was not found")]
         public async Task<IActionResult> Get(string customerName, string confirmationId)
         {
             var order = await ordersRepository.GetAsync(customerName, confirmationId);
@@ -46,9 +51,10 @@ namespace Containo.Services.Orders.Api.Controllers
         /// <summary>
         ///     Provides details about an order that was made
         /// </summary>
-        [Route(template: "orders")]
+        [Route("orders")]
         [HttpPost]
-        [SwaggerResponse((int)HttpStatusCode.Created, description: "Information about the order", type: typeof(OrderConfirmation))]
+        [SwaggerResponse((int) HttpStatusCode.Created, description: "Information about the order",
+            type: typeof(OrderConfirmation))]
         public async Task<IActionResult> Post([FromBody] OrderRequest orderRequest)
         {
             var confirmationId = Guid.NewGuid().ToString();
@@ -97,8 +103,8 @@ namespace Containo.Services.Orders.Api.Controllers
                 CorrelationId = Guid.NewGuid().ToString()
             };
 
-            var connectionString = Environment.GetEnvironmentVariable(variable: "ServiceBus_ConnectionString");
-            var queueName = Environment.GetEnvironmentVariable(variable: "Orders_Queue_Name");
+            var connectionString = Environment.GetEnvironmentVariable("ServiceBus_ConnectionString");
+            var queueName = Environment.GetEnvironmentVariable("Orders_Queue_Name");
             var queueClient = new QueueClient(connectionString, queueName);
             await queueClient.SendAsync(message);
         }
