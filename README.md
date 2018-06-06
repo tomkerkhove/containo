@@ -7,3 +7,7 @@ The company is running their platform on Docker containers written in .NET Core.
 
 
 ![.NET Core](./media/dotnet.png)![Docker](./media/docker.png)![Kong](./media/kong.png)
+
+## Service Fabric Mesh
+
+![Service Fabric Mesh](./media/docs/service-fabric-mesh-setup.png)
