@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Containo.Core.Api.Extensions;
+﻿using Containo.Core.Api.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Containo.Services.Orders.Validator
 {
@@ -37,7 +31,7 @@ namespace Containo.Services.Orders.Validator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.UseOpenApiSpecifications("Order Validation", apiVersion: 1);
+            services.UseOpenApiSpecifications("Order Validation", 1);
         }
     }
 }

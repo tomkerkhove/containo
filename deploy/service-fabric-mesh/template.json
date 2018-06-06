@@ -123,6 +123,27 @@
                                         {
                                             "name": "Redis_ConnectionString",
                                             "value": "localhost:6379"
+                                        },
+                                        {
+                                            "name": "Services_Validation_Url",
+                                            "value": "http://localhost:81"
+                                        }
+                                    ],
+                                    "resources": {
+                                        "requests": {
+                                            "cpu": 1,
+                                            "memoryInGB": 1
+                                        }
+                                    }
+                                },
+                                {
+                                    "name": "Containo.Orders.Validator",
+                                    "image": "tomkerkhove/containo.services.orders.validator:dev",
+                                    "endpoints": [],
+                                    "environmentVariables": [
+                                        {
+                                            "name": "ASPNETCORE_ENVIRONMENT",
+                                            "value": "[parameters('Application.Environment')]"
                                         }
                                     ],
                                     "resources": {
@@ -191,8 +212,7 @@
                             ],
                             "replicaCount": 1,
                             "networkRefs": [
-                                {
-                                }
+                                {}
                             ]
                         }
                     }

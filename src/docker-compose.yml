@@ -15,7 +15,7 @@ services:
 
 
   containo.services.orders.validator:
-    image: tomkerkhove/.services.orders.validator
+    image: tomkerkhove/containo.services.orders.validator
     build:
       context: .
       dockerfile: ../Containo.Services.Orders.Validator/Dockerfile
