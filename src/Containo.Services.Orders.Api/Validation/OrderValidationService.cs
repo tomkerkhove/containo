@@ -15,8 +15,7 @@ namespace Containo.Services.Orders.Api.Validation
                 .AppendPathSegment("orders")
                 .AppendPathSegment("validation")
                 .SetQueryParam("amount", orderRequest.Amount);
-
-
+            
             var httpClient = new HttpClient();
             var validationResponse = await httpClient.GetAsync(validationEndpoint.ToString());
             return validationResponse.IsSuccessStatusCode;
