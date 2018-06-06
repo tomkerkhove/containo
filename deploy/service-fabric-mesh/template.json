@@ -135,11 +135,7 @@
                                 {
                                     "name": "Containo.Orders.Cache",
                                     "image": "redis:4.0",
-                                    "endpoints": [
-                                        {
-                                            "name": "Redis",
-                                            "port": 6379
-                                        }],
+                                    "endpoints": [],
                                     "environmentVariables": [],
                                     "resources": {
                                         "requests": {
