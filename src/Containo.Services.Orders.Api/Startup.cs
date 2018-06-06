@@ -1,4 +1,8 @@
 using Containo.Core.Api.Extensions;
+using Containo.Services.Orders.Storage.Caching;
+using Containo.Services.Orders.Storage.Caching.Interfaces;
+using Containo.Services.Orders.Storage.Repositories;
+using Containo.Services.Orders.Storage.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
