@@ -1,0 +1,34 @@
+name: 0.1.0$(rev:.r)
+resources:
+- repo: self
+trigger:
+  branches:
+    include:
+    - master
+queue: Hosted Linux Preview
+steps:
+- task: DockerCompose@0
+  displayName: Build Docker Images
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryEndpoint: 'Docker Hub (Tom Kerkhove)'
+    dockerComposeFile: 'src/docker-compose.yml'
+    action: 'Build services'
+    additionalImageTags: |
+     $(Build.BuildNumber)
+     dev
+    includeSourceTags: true
+    includeLatestTag: true
+
+- task: DockerCompose@0
+  displayName: Push Docker Images
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryEndpoint: 'Docker Hub (Tom Kerkhove)'
+    dockerComposeFile: 'src/docker-compose.yml'
+    action: 'Push services'
+    additionalImageTags: |
+     $(Build.BuildNumber)
+     dev
+    includeSourceTags: true
+    includeLatestTag: true

@@ -1,4 +1,4 @@
-﻿using Containo.Core.Api.Extensions;
+using Containo.Core.Api.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +30,10 @@ namespace Containo.Services.Orders.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<ICache, RedisCache>();
+            services.AddSingleton<ICachedReadOrdersRepository, CachedOrdersRepository>();
+            services.AddSingleton<IReadOrdersRepository, OrdersRepository>();
+
             services.AddMvc();
             services.UseOpenApiSpecifications("Orders", apiVersion: 1);
         }
