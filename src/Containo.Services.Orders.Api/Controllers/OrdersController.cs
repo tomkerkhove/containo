@@ -4,7 +4,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Containo.Services.Orders.Api.Contracts.v1;
-using Containo.Services.Orders.Api.Validation;
+using Containo.Services.Orders.Api.Services;
 using Containo.Services.Orders.Contracts.Messaging.v1;
 using Containo.Services.Orders.Storage.Contracts.v1;
 using Containo.Services.Orders.Storage.Repositories.Interfaces;
@@ -18,13 +18,14 @@ namespace Containo.Services.Orders.Api.Controllers
     [Route("api")]
     public class OrdersController : Controller
     {
-        private readonly OrderValidationService orderValidationService = new OrderValidationService();
+        private readonly OrderValidationService orderValidationService;
         private readonly Dictionary<string, OrderRequest> orders = new Dictionary<string, OrderRequest>();
         private readonly ICachedReadOrdersRepository ordersRepository;
 
-        public OrdersController(ICachedReadOrdersRepository ordersRepository)
+        public OrdersController(ICachedReadOrdersRepository ordersRepository, OrderValidationService orderValidationService)
         {
             this.ordersRepository = ordersRepository;
+            this.orderValidationService = orderValidationService;
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 using Containo.Core.Api.Extensions;
+using Containo.Services.Orders.Api.Services;
 using Containo.Services.Orders.Storage.Caching;
 using Containo.Services.Orders.Storage.Caching.Interfaces;
 using Containo.Services.Orders.Storage.Repositories;
@@ -34,12 +35,13 @@ namespace Containo.Services.Orders.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<OrderValidationService>();
             services.AddSingleton<ICache, RedisCache>();
             services.AddSingleton<ICachedReadOrdersRepository, CachedOrdersRepository>();
             services.AddSingleton<IReadOrdersRepository, OrdersRepository>();
 
             services.AddMvc();
-            services.UseOpenApiSpecifications("Orders", apiVersion: 1);
+            services.UseOpenApiSpecifications("Orders", 1);
         }
     }
 }
