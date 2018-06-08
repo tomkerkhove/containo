@@ -1,5 +1,6 @@
 Containo
 ===========================
+[![Build Status](https://travis-ci.com/tomkerkhove/containo.svg?token=GsSXSXe5xF8ZdYK5qExq&branch=master)](https://travis-ci.com/tomkerkhove/containo)
 
 Containo is a fictious company that is building a product that provides a catalog of products to buy that 3rd parties can consume.
 
@@ -24,3 +25,4 @@ Before an order is confirmed, the platform will verify if enough items are avail
 ## Documentation
 Here is some documentation on this reference implementation
 - [Service Fabric Mesh Composition](./docs/service-fabric-mesh-composition.md)
+
