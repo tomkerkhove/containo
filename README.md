@@ -6,7 +6,7 @@ Containo is a fictious company that is building a product that provides a catalo
 
 The company is running their platform on Docker containers written in .NET Core. All of their APIs are being exposed via Kong as an API gateway.
 
-![.NET Core](./media/dotnet.png)![Docker](./media/docker-logo.png)![Kong](./media/kong-logo.png)![Azure Service Fabric Mesh](./media/service-fabric-mesh-logo.png)
+![.NET Core](./media/dotnet.png)![Docker](./media/docker-logo.png)![Kong](./media/kong-logo.png)![Kubernetes](./media/kubernetes-logo.png)![Azure Service Fabric Mesh](./media/service-fabric-mesh-logo.png)
 
 ## Scenario
 Containo provides an e-commerce SaaS platform where vendors can signup to become a vendor to sell products from the marketplace.
