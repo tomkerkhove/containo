@@ -15,6 +15,12 @@ Before an order is confirmed, the platform will verify if enough items are avail
 
 ![Business Case](./media/docs/business-case.png)
 
+----------------------------
+
+:rotating_light: This is under active development and is currently limited to making orders.
+
+----------------------------
+
 ## Documentation
 Here is some documentation on this reference implementation
 - [Service Fabric Mesh Composition](./docs/service-fabric-mesh-composition.md)
