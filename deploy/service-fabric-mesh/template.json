@@ -32,7 +32,7 @@
         },
         "Application.Queues.Name": {
             "type": "string",
-            "defaultValue": "orders",
+            "defaultValue": "orders-service-fabric-mesh",
             "metadata": {
                 "description": "Name of network the queue that will be used for creating orders"
             }
@@ -96,7 +96,7 @@
                             "codePackages": [
                                 {
                                     "name": "Containo.Orders.API",
-                                    "image": "tomkerkhove/containo.services.orders.api:dev",
+                                    "image": "tomkerkhove/containo.services.orders.api:0.1.0.1",
                                     "endpoints": [
                                         {
                                             "name": "HTTP-Public",
@@ -182,7 +182,7 @@
                             "codePackages": [
                                 {
                                     "name": "Containo.Orders.QueueProcessor",
-                                    "image": "tomkerkhove/containo.services.orders.queueprocessor:dev",
+                                    "image": "tomkerkhove/containo.services.orders.queueprocessor:0.1.0.1",
                                     "endpoints": [],
                                     "environmentVariables": [
                                         {
