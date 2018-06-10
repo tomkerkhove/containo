@@ -5,9 +5,10 @@ The application is modelled in multiple **deployments** which each deploy **repl
 
     A service can have multiple **code packages** which are basically Docker containers running next to each other and are scaled together. You should avoid having too many code packages in one service but allow you to use patterns such as the [Sidecar pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar).
 
-Unfortunately Kuberenetes does not have the concept of "an application" that groups multiple pods/replica sets, at least not to my knowledge. That said, it allows you to create isolated **namespaces** which allows you to isolate entities from one another. Every entity is also capable to providing metadata about itself by assinging **labels**. In this scenario every entity is deployed in a dedicated namespace and has at least the following labels - `app`, `microservice`, `service`, `type`.
-
 ![Kubernetes](./../media/docs/kubernetes-composition.png)
+
+
+Unfortunately Kuberenetes does not have the concept of "an application" which represents a group of replica sets _(at least not to my knowledge)_. However, it allows you to create isolated **namespaces** which isolate entities from another namespace so that they don't interfer with each other or another person changes your application. Another interesting aspect is that every entity is also capable of providing metadata about itself by assinging **labels**. In our scenario every entity is deployed in a dedicated namespace and has at least the following labels - `app`, `microservice`, `service`, `type`.
 
 By using a **service** we can expose our API to the internet. This entity is using the labels that we have assigned to forward traffic to the internal port of the container inside the pod by using port forwarding.
 
