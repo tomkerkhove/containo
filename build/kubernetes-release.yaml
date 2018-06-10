@@ -1,0 +1,14 @@
+resources:
+- repo: self
+queue:
+  name: Hosted VS2017
+steps:
+- task: Kubernetes@0
+  displayName: Deploy Orders Microservice
+  inputs:
+    kubernetesServiceConnection: Containo
+    namespace: containo
+    arguments: '-f "$(System.DefaultWorkingDirectory)\deploy\kubernetes\orders-declaration.yaml"'
+    outputFormat: yaml
+
+
