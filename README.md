@@ -25,4 +25,5 @@ Before an order is confirmed, the platform will verify if enough items are avail
 ## Documentation
 Here is some documentation on this reference implementation
 - [Service Fabric Mesh Composition](./docs/service-fabric-mesh-composition.md)
+- [Kubernetes Composition](./docs/kubernetes-composition.md)
 
