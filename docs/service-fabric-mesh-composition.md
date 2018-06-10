@@ -11,6 +11,6 @@ The API service is part of a **network** which is exposing the API to the intern
 
 ----------------------------
 
-:rotating_light: _This scenario runs a Redis instance in the same service as the API. While this might seem perfect, they have different scaling needs and you might want to use a different appraoch._
+:rotating_light: _This scenario runs a Redis instance in the same service as the API. While this might seem perfect, they have different scaling needs and you should not do this but in this scenario I'm using this to indicate how you can run multiple containers in one service._
 
 ----------------------------
