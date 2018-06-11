@@ -1,5 +1,6 @@
 resources:
 - repo: self
+trigger: none
 queue:
   name: Hosted VS2017
 steps:
@@ -8,7 +9,7 @@ steps:
   inputs:
     kubernetesServiceConnection: Containo
     namespace: containo
-    arguments: '-f "$(System.DefaultWorkingDirectory)\deploy\kubernetes\orders-declaration.yaml"'
+    arguments: '-f "$(System.DefaultWorkingDirectory)\deploy\orders-declaration-kubernetes.yaml"'
     outputFormat: yaml
 
 
