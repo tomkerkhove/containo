@@ -15,6 +15,7 @@ Customers can sign up and order products from either Containo itself or one of t
 Before an order is confirmed, the platform will verify if enough items are available in their own inventory or order more items with their vendors.
 
 ![Business Case](./media/docs/business-case.png)
+
 _Services with * are not implemented yet._
 
 ----------------------------
