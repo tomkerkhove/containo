@@ -26,6 +26,8 @@ _Services with * are not implemented yet._
 
 ## Documentation
 Here is some documentation on this reference implementation
+- [Building Containo](./build/README.md)
+- [Deploying Containo](./deploy/README.md)
 - [Service Fabric Mesh Composition](./docs/service-fabric-mesh-composition.md)
 - [Kubernetes Composition](./docs/kubernetes-composition.md)
 
