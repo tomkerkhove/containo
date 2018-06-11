@@ -17,7 +17,7 @@ These are natively supported by VSTS which is documented [here](https://docs.mic
 ## Builds, tags and pushes the containers to a Docker container registry
 You will have to create a new Docker Hub service endpoint and replace it with the `Docker Hub (Tom Kerkhove)` value in `dockerRegistryEndpoint` ([docs]((https://docs.microsoft.com/en-us/vsts/pipelines/library/service-endpoints?view=vsts#sep-docreg))).
 
-## Deploys Containo on a Kubernetes cluster
+## Deploying Containo on a Kubernetes cluster
 Before you can deploy to a Kubernetes cluster you will have to:
 - Create a new Kubernetes service endpoint ([docs](https://docs.microsoft.com/en-us/vsts/pipelines/library/service-endpoints?view=vsts#sep-kuber))
 - Assign the new endpoint in `kubernetesServiceConnection` instead of `Containo`
@@ -27,7 +27,7 @@ Before you can deploy to a Kubernetes cluster you will have to:
 When you want to use your own container registry, you need to:
 - Update the declaration to use the images from your registry
 
-## Deploys Containo on Azure Service Fabric Mesh
+## Deploying Containo on Azure Service Fabric Mesh
 Before you can deploy to Azure Service Fabric Mesh you will have to:
 - Create a new Azure Resource Manager service endpoint ([docs](https://docs.microsoft.com/en-us/vsts/pipelines/library/service-endpoints?view=vsts#sep-azure-rm))
 - Change the YAML template to use the correct `azureSubscription`, `resourceGroupName` & `location`
