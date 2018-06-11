@@ -13,7 +13,7 @@ Before you can deploy to a Kubernetes cluster you will have to:
 When you want to use your own container registry, you need to:
 - Update the declaration to use the images from your registry
 
-You can either deploy to a Kubernetes cluster via a [VSTS build]() or via `kubectl`:
+You can either deploy to a Kubernetes cluster via a [VSTS build](./../build/README.md#deploying-containo-on-a-kubernetes-cluster) or via `kubectl`:
 ```
 kubectl apply -f orders-declaration-kubernetes.yaml --namespace="<your-namespace>"
 ```
@@ -26,3 +26,8 @@ Before you can deploy to Azure Service Fabric Mesh you will have to:
 
 When you want to use your own container registry, you need to:
 - Update the declaration to use the images from your registry
+
+You can either deploy to Azure Service Fabric Mesh via a [VSTS build](./../build/README.md#deploying-containo-on-azure-service-fabric-mesh), Azure CLI or Azure Cloud Shell:
+```
+az mesh deployment create --resource-group containo-apps --template-uri <uri-to-declaration>
+```
