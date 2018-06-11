@@ -1,14 +1,38 @@
 # Building Containo
-This documentation describes how you can build the Docker containers and release to Kubernetes & Service Fabric Mesh with Visual Studio Team Services.
+This documentation describes how you can build the Docker containers and release to Kubernetes & Service Fabric Mesh with Visual Studio Team Services (VSTS).
+
+In order to achieve this, you can create builds based on the YAML templates that are provided:
+- `release-containers.yaml` - **Builds, tags and pushes the containers to a Docker container registry.**
+- `release-kubernetes.yaml` - **Deploys Containo on a Kubernetes cluster.**
+- `release-service-fabric-mesh.yaml` - **Deploys Containo on Azure Service Fabric Mesh.**
+
+These are natively supported by VSTS which is documented [here](https://docs.microsoft.com/en-us/vsts/pipelines/build/yaml?view=vsts#manually-create-a-yaml-build-definition).
 
 ----------------------------
 
-:rotating_light: Currently I'm using builds to release to Kubernetes & Service Fabric Mesh given I only have 1 environment. In the real world, you should be using a release pipeline instead but the same concepts can be used.
+:rotating_light: _Currently I'm using builds to release to Kubernetes & Service Fabric Mesh given I only have 1 environment. In the real world, you should be using a release pipeline instead but the same concepts can be used._
 
 ----------------------------
 
-## Releasing to Kubernetes
+## Builds, tags and pushes the containers to a Docker container registry
+You will have to create a new Docker Hub service endpoint and replace it with the `Docker Hub (Tom Kerkhove)` value in `dockerRegistryEndpoint` ([docs]((https://docs.microsoft.com/en-us/vsts/pipelines/library/service-endpoints?view=vsts#sep-docreg))).
 
-## Releasing to Service Fabric Mesh
-- `Orders_ServiceBus_ConnectionString`
-- `Orders_TableStorage_ConnectionString`
+## Deploys Containo on a Kubernetes cluster
+Before you can deploy to a Kubernetes cluster you will have to:
+- Create a new Kubernetes service endpoint ([docs](https://docs.microsoft.com/en-us/vsts/pipelines/library/service-endpoints?view=vsts#sep-kuber))
+- Assign the new endpoint in `kubernetesServiceConnection` instead of `Containo`
+- Create a secret and assign it to the `ServiceBus_ConnectionString` secret ([docs](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret-manually))
+- Create a secret and assign it to the `TableStorage_ConnectionString` secret ([docs](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret-manually))
+
+When you want to use your own container registry, you need to:
+- Update the declaration to use the images from your registry
+
+## Deploys Containo on Azure Service Fabric Mesh
+Before you can deploy to Azure Service Fabric Mesh you will have to:
+- Create a new Azure Resource Manager service endpoint ([docs](https://docs.microsoft.com/en-us/vsts/pipelines/library/service-endpoints?view=vsts#sep-azure-rm))
+- Change the YAML template to use the correct `azureSubscription`, `resourceGroupName` & `location`
+- Configure the connection string to Service Bus in a variable named `Orders_ServiceBus_ConnectionString`
+- Configure the connection string to Azure Storage in a variable named `Orders_TableStorage_ConnectionString`
+
+When you want to use your own container registry, you need to:
+- Update the declaration to use the images from your registry
