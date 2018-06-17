@@ -1,7 +1,7 @@
-FROM microsoft/dotnet:2.0-runtime@sha256:8b0ea9c3d2317f57f0272f2c8c5e56522d52081c25124982e6f1be9285433c45 AS base
+FROM microsoft/dotnet:2.1-runtime@sha256:d195f6853eb64ae900745c346a9c14bc4e03d78f2cd97335106f4da80417399c AS base
 WORKDIR /app
 
-FROM microsoft/dotnet:2.0-sdk@sha256:8fc6dd50b2736c638f3dcdba2604ff9a36a7b6d85b385484c8014ff7ba2344de AS build
+FROM microsoft/dotnet:2.1-sdk@sha256:5ce14e07bd69096f15f4792a85baf46983e655f6535fc87b7235373f3cec99a3 AS build
 WORKDIR /src
 COPY Containo.sln ./
 COPY Containo.Services.Orders.QueueProcessor/Containo.Services.Orders.QueueProcessor.csproj Containo.Services.Orders.QueueProcessor/
