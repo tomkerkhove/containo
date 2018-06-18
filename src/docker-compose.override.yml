@@ -1,16 +1,24 @@
 version: '3.4'
 
 services:
+  containo.services.orders.queueprocessor:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - TableStorage_ConnectionString=<secret>
+      - ServiceBus_ConnectionString=<secret>
+      - Orders_Queue_Name=local-orders
   containo.services.orders.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - Services_Validation_Url=http://containo.services.orders.validator
+      - TableStorage_ConnectionString=<secret>
+      - ServiceBus_ConnectionString=<secret>
+      - Orders_Queue_Name=local-orders
+      - Redis_ConnectionString=<secret>
     ports:
       - "80"
-
-
   containo.services.orders.validator:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
-      - "81"
-
+      - "80"
