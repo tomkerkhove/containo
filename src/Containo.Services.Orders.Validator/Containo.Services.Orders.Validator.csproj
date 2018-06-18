@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.5.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +25,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Containo.Core.Api\Containo.Core.Api.csproj" />
     <ProjectReference Include="..\Containo.Core.Api\Containo.Core.Api.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Docs\Open-Api.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
