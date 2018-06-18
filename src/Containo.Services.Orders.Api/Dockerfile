@@ -1,18 +1,20 @@
-FROM microsoft/aspnetcore:2.0@sha256:5f964756fae50873c496915ad952b0f15df8ef985e4ac031d00b7ac0786162d0 AS base
+FROM microsoft/aspnetcore:2.0 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM microsoft/aspnetcore-build:2.0@sha256:1e4043c2484157e029d6b09a3149ebd01c5122f6b62f0a1b6c6f54b90500ea4b AS build
+FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
-COPY Containo.sln ./
 COPY Containo.Services.Orders.Api/Containo.Services.Orders.Api.csproj Containo.Services.Orders.Api/
-RUN dotnet restore -nowarn:msb3202,nu1503
+COPY Containo.Services.Orders.Storage/Containo.Services.Orders.Storage.csproj Containo.Services.Orders.Storage/
+COPY Containo.Services.Orders.Contracts/Containo.Services.Orders.Contracts.csproj Containo.Services.Orders.Contracts/
+COPY Containo.Core.Api/Containo.Core.Api.csproj Containo.Core.Api/
+RUN dotnet restore Containo.Services.Orders.Api/Containo.Services.Orders.Api.csproj
 COPY . .
 WORKDIR /src/Containo.Services.Orders.Api
-RUN dotnet build -c Release -o /app
+RUN dotnet build Containo.Services.Orders.Api.csproj -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish -c Release -o /app
+RUN dotnet publish Containo.Services.Orders.Api.csproj -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
