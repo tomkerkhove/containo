@@ -1,0 +1,16 @@
+resources:
+- repo: self
+trigger: none
+queue:
+  name: Hosted VS2017
+steps:
+- task: AzureResourceGroupDeployment@2
+  displayName: Deploy Orders Application on Service Fabric Mesh
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise (0f9d7fea-99e8-4768-8672-06a28514f77e)'
+    resourceGroupName: 'containo-apps'
+    location: 'East US'
+    csmFile: 'deploy/orders-declaration-service-fabric-mesh.json'
+    overrideParameters: '-Application.Name "Containo.Orders" -Application.Description "Application that is used to create orders" -Application.Environment "Development" -Application.Network.Name "Containo.Network" -Application.Queues.Name "orders-service-fabric-mesh" -ServiceBus.ConnectionString $(Orders_ServiceBus_ConnectionString) -TableStorage.ConnectionString $(Orders_TableStorage_ConnectionString) -Region "eastus"'
+
+

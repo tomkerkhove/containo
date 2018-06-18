@@ -16,6 +16,8 @@ Before an order is confirmed, the platform will verify if enough items are avail
 
 ![Business Case](./media/docs/business-case.png)
 
+_Services with * are not implemented yet._
+
 ----------------------------
 
 :rotating_light: This is under active development and is currently limited to making orders.
@@ -24,5 +26,8 @@ Before an order is confirmed, the platform will verify if enough items are avail
 
 ## Documentation
 Here is some documentation on this reference implementation
+- [Building Containo](./build/README.md)
+- [Deploying Containo](./deploy/README.md)
 - [Service Fabric Mesh Composition](./docs/service-fabric-mesh-composition.md)
+- [Kubernetes Composition](./docs/kubernetes-composition.md)
 
