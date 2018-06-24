@@ -2,12 +2,12 @@ version: '3.4'
 
 services:
   containo.services.orders.queueprocessor:
-    image: tomkerkhove/containo.services.orders.queueprocessor:latest@sha256:b367f7c048ffdf748f791e2b7f15063bef338ad5459caeedf139e9baceb18e9f
+    image: tomkerkhove/containo.services.orders.queueprocessor
     build:
       context: ./Containo.Services.Orders.QueueProcessor
       dockerfile: Dockerfile
   containo.services.orders.api:
-    image: tomkerkhove/containo.services.orders.api:latest@sha256:7f509bcb4f84f169d187098b4b575f4d0f0e2ca64ef1eb1d798e1b456b6d17e9
+    image: tomkerkhove/containo.services.orders.api
     build:
       context: ./Containo.Services.Orders.Api
       dockerfile: Dockerfile
