@@ -1,15 +1,10 @@
-using Containo.Core.Api.Extensions;
-using Containo.Services.Orders.Api.Services;
-using Containo.Services.Orders.Storage.Caching;
-using Containo.Services.Orders.Storage.Caching.Interfaces;
-using Containo.Services.Orders.Storage.Repositories;
-using Containo.Services.Orders.Storage.Repositories.Interfaces;
+﻿using Containo.Core.Api.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Containo.Services.Orders.Api
+namespace Containo.Services.Orders.Validator
 {
     public class Startup
     {
@@ -35,13 +30,8 @@ namespace Containo.Services.Orders.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<OrderValidationService>();
-            services.AddSingleton<ICache, RedisCache>();
-            services.AddSingleton<ICachedReadOrdersRepository, CachedOrdersRepository>();
-            services.AddSingleton<IReadOrdersRepository, OrdersRepository>();
-
             services.AddMvc();
-            services.UseOpenApiSpecifications("Orders", 1);
+            services.UseOpenApiSpecifications("Order Validation", 1);
         }
     }
 }

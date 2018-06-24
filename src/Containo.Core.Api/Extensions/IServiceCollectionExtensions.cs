@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace Containo.Services.Orders.Api.Extensions
+namespace Containo.Core.Api.Extensions
 {
     public static class IServiceCollectionExtensions
     {
         /// <summary>
-      ///     Use OpenAPI specification
-      /// </summary>
-      /// <param name="services">Collections of services in application</param>
-      /// <param name="apiVersion">Version of the API</param>
-        public static void UseOpenApiSpecifications(this IServiceCollection services, int apiVersion)
+        ///     Use OpenAPI specification
+        /// </summary>
+        /// <param name="services">Collections of services in application</param>
+        /// <param name="apiName">Name of the API</param>
+        /// <param name="apiVersion">Version of the API</param>
+        public static void UseOpenApiSpecifications(this IServiceCollection services, string apiName, int apiVersion)
         {
             var openApiInformation = new Info
             {
@@ -25,7 +23,7 @@ namespace Containo.Services.Orders.Api.Extensions
                     Name = "Tom Kerkhove",
                     Url = "https://blog.tomkerkhove.be"
                 },
-                Title = $"Containo v{apiVersion}",
+                Title = $"Containo v{apiVersion} - {apiName}",
                 Description = $"Collection of APIs to order items on the Containo platform",
                 Version = $"v{apiVersion}",
                 License = new License

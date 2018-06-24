@@ -4,6 +4,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Containo.Services.Orders.Api.Contracts.v1;
+using Containo.Services.Orders.Api.Services;
 using Containo.Services.Orders.Contracts.Messaging.v1;
 using Containo.Services.Orders.Storage.Contracts.v1;
 using Containo.Services.Orders.Storage.Repositories.Interfaces;
@@ -17,12 +18,14 @@ namespace Containo.Services.Orders.Api.Controllers
     [Route("api")]
     public class OrdersController : Controller
     {
-        private static readonly Dictionary<string, OrderRequest> orders = new Dictionary<string, OrderRequest>();
+        private readonly OrderValidationService orderValidationService;
+        private readonly Dictionary<string, OrderRequest> orders = new Dictionary<string, OrderRequest>();
         private readonly ICachedReadOrdersRepository ordersRepository;
 
-        public OrdersController(ICachedReadOrdersRepository ordersRepository)
+        public OrdersController(ICachedReadOrdersRepository ordersRepository, OrderValidationService orderValidationService)
         {
             this.ordersRepository = ordersRepository;
+            this.orderValidationService = orderValidationService;
         }
 
         /// <summary>
@@ -32,9 +35,9 @@ namespace Containo.Services.Orders.Api.Controllers
         /// <param name="confirmationId">Id of the confirmation when the order was made</param>
         [Route("{customerName}/orders/{confirmationId}")]
         [HttpGet]
-        [SwaggerResponse((int) HttpStatusCode.OK, description: "Information about the order",
+        [SwaggerResponse((int)HttpStatusCode.OK, description: "Information about the order",
             type: typeof(OrderConfirmation))]
-        [SwaggerResponse((int) HttpStatusCode.NotFound, description: "Order was not found")]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, description: "Order was not found")]
         public async Task<IActionResult> Get(string customerName, string confirmationId)
         {
             var order = await ordersRepository.GetAsync(customerName, confirmationId);
@@ -53,10 +56,17 @@ namespace Containo.Services.Orders.Api.Controllers
         /// </summary>
         [Route("orders")]
         [HttpPost]
-        [SwaggerResponse((int) HttpStatusCode.Created, description: "Information about the order",
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, description: "Order was not valid")]
+        [SwaggerResponse((int)HttpStatusCode.Created, description: "Information about the order",
             type: typeof(OrderConfirmation))]
         public async Task<IActionResult> Post([FromBody] OrderRequest orderRequest)
         {
+            var isValidOrder = await orderValidationService.ValidateAsync(orderRequest);
+            if (isValidOrder == false)
+            {
+                return BadRequest();
+            }
+
             var confirmationId = Guid.NewGuid().ToString();
             var orderConfirmation = new OrderConfirmation
             {
