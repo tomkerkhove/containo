@@ -5,6 +5,7 @@ FROM microsoft/dotnet:2.0-sdk@sha256:8fc6dd50b2736c638f3dcdba2604ff9a36a7b6d85b3
 WORKDIR /src
 COPY Containo.sln ./
 COPY Containo.Services.Orders.QueueProcessor/Containo.Services.Orders.QueueProcessor.csproj Containo.Services.Orders.QueueProcessor/
+RUN ls -R
 RUN dotnet restore -nowarn:msb3202,nu1503
 COPY . .
 WORKDIR /src/Containo.Services.Orders.QueueProcessor
