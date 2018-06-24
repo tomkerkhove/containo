@@ -6,10 +6,11 @@ FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
 RUN ls -R
 COPY Containo.sln ./
-COPY Containo.Services.Orders.Api/Containo.Services.Orders.Api.csproj Containo.Services.Orders.Api/
+COPY Containo.Services.Orders.Api.csproj Containo.Services.Orders.Api
 COPY Containo.Services.Orders.Storage/Containo.Services.Orders.Storage.csproj Containo.Services.Orders.Storage/
 COPY Containo.Services.Orders.Contracts/Containo.Services.Orders.Contracts.csproj Containo.Services.Orders.Contracts/
 COPY Containo.Core.Api/Containo.Core.Api.csproj Containo.Core.Api/
+RUN ls -R
 RUN dotnet restore -nowarn:msb3202,nu1503
 COPY . .
 WORKDIR /src/Containo.Services.Orders.Api

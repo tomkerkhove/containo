@@ -4,15 +4,15 @@ services:
   containo.services.orders.queueprocessor:
     image: tomkerkhove/containo.services.orders.queueprocessor
     build:
-      context: ./Containo.Services.Orders.QueueProcessor
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Containo.Services.Orders.QueueProcessor/Dockerfile
   containo.services.orders.api:
     image: tomkerkhove/containo.services.orders.api
     build:
-      context: ./Containo.Services.Orders.Api
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Containo.Services.Orders.Api/Dockerfile
   containo.services.orders.validator:
     image: tomkerkhove/containo.services.orders.validator
     build:
-      context: ./Containo.Services.Orders.Validator
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Containo.Services.Orders.Validator/Dockerfile
