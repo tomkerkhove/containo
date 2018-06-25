@@ -25,7 +25,7 @@
         },
         "Application.Network.Name": {
             "type": "string",
-            "defaultValue": "Containo.Network",
+            "defaultValue": "Containo.Network.Public",
             "metadata": {
                 "description": "Name of network to use in which your Service Fabric Application will be"
             }
@@ -47,6 +47,12 @@
             "type": "securestring",
             "metadata": {
                 "description": "Connection string to Azure Storage"
+            }
+        },
+        "Redis.ConnectionString": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Connection string to a Redis Cluster"
             }
         },
         "Region": {
@@ -74,7 +80,7 @@
                             "publicPort": "1337",
                             "applicationName": "[parameters('Application.Name')]",
                             "serviceName": "Containo.Orders.API",
-                            "endpointName": "HTTP-Public"
+                            "endpointName": "HTTP-Public-APIs-Orders"
                         }
                     ]
                 }
@@ -96,10 +102,10 @@
                             "codePackages": [
                                 {
                                     "name": "Containo.Orders.API",
-                                    "image": "tomkerkhove/containo.services.orders.api:0.1.0.1",
+                                    "image": "tomkerkhove/containo.services.orders.api:0.1.0.19",
                                     "endpoints": [
                                         {
-                                            "name": "HTTP-Public",
+                                            "name": "HTTP-Public-APIs-Orders",
                                             "port": 80
                                         }
                                     ],
@@ -107,6 +113,10 @@
                                         {
                                             "name": "ASPNETCORE_ENVIRONMENT",
                                             "value": "[parameters('Application.Environment')]"
+                                        },
+                                        {
+                                            "name": "ASPNETCORE_URLS",
+                                            "value": "http://+:80"
                                         },
                                         {
                                             "name": "Orders_Queue_Name",
@@ -122,7 +132,7 @@
                                         },
                                         {
                                             "name": "Redis_ConnectionString",
-                                            "value": "localhost:6379"
+                                            "value": "[parameters('Redis.ConnectionString')]"
                                         },
                                         {
                                             "name": "Services_Validation_Url",
@@ -138,26 +148,18 @@
                                 },
                                 {
                                     "name": "Containo.Orders.Validator",
-                                    "image": "tomkerkhove/containo.services.orders.validator:dev",
+                                    "image": "tomkerkhove/containo.services.orders.validator:0.1.0.19",
                                     "endpoints": [],
                                     "environmentVariables": [
                                         {
                                             "name": "ASPNETCORE_ENVIRONMENT",
                                             "value": "[parameters('Application.Environment')]"
+                                        },
+                                        {
+                                            "name": "ASPNETCORE_URLS",
+                                            "value": "http://+:81"
                                         }
                                     ],
-                                    "resources": {
-                                        "requests": {
-                                            "cpu": 1,
-                                            "memoryInGB": 1
-                                        }
-                                    }
-                                },
-                                {
-                                    "name": "Containo.Orders.Cache",
-                                    "image": "redis:4.0",
-                                    "endpoints": [],
-                                    "environmentVariables": [],
                                     "resources": {
                                         "requests": {
                                             "cpu": 1,
@@ -182,7 +184,7 @@
                             "codePackages": [
                                 {
                                     "name": "Containo.Orders.QueueProcessor",
-                                    "image": "tomkerkhove/containo.services.orders.queueprocessor:0.1.0.1",
+                                    "image": "tomkerkhove/containo.services.orders.queueprocessor:0.1.0.19",
                                     "endpoints": [],
                                     "environmentVariables": [
                                         {
