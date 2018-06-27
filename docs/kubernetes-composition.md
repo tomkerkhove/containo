@@ -3,7 +3,7 @@ The application is modelled in multiple **deployments** which each deploy **repl
 
 Replica Sets are a way of what **pods** it should be running and can be scaled independently from other Replica Sets; either manually or automatically. In our scenario we will have a replica set for our API & our asynchornous worker so that they can be scaling based on their specific needs. In our scenario we would prefer to scale the worker out when messages on the queue pile up while we'd like to scale our API based on CPU and/or memory.
 
-A pod can have multiple **containers** running next to each other and are scaled together. You should avoid having too many containers running in one pod but it allows you to use patterns such as the [Sidecar pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar).
+A pod can have multiple **containers** running next to each other and form a scale unit. In our case, this is represented by our API container which is using the orders validator [sidecar](https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar).
 
 ![Kubernetes](./../media/docs/kubernetes-composition.png)
 
