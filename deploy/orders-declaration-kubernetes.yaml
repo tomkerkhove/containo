@@ -20,16 +20,23 @@ spec:
     spec:
       containers:
         - name: containo-orders-api
-          image: tomkerkhove/containo.services.orders.api:0.1.0.1
+          image: tomkerkhove/containo.services.orders.api:0.1.0.19
           ports:
           - containerPort: 80
           env:
           - name:  ASPNETCORE_ENVIRONMENT
             value: Development
+          - name:  ASPNETCORE_URLS
+            value: http://+:80
           - name:  Orders_Queue_Name
             value: orders-kubernetes
+          - name: Services_Validation_Url
+            value: http://localhost:81
           - name:  Redis_ConnectionString
-            value: localhost:6379
+            valueFrom:
+              secretKeyRef:
+                name: containo-orders
+                key: Redis_ConnectionString
           - name:  ServiceBus_ConnectionString
             valueFrom:
               secretKeyRef:
@@ -40,8 +47,15 @@ spec:
               secretKeyRef:
                 name: containo-orders
                 key: TableStorage_ConnectionString
-        - name: containo-orders-api-cache
-          image: redis:4.0
+        - name: containo-orders-api-validator
+          image: tomkerkhove/containo.services.orders.validator:0.1.0.19
+          ports:
+          - containerPort: 81
+          env:
+          - name:  ASPNETCORE_ENVIRONMENT
+            value: Development
+          - name:  ASPNETCORE_URLS
+            value: http://+:81
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -65,10 +79,12 @@ spec:
     spec:
       containers:
         - name: containo-orders-api
-          image: tomkerkhove/containo.services.orders.queueprocessor:0.1.0.1
+          image: tomkerkhove/containo.services.orders.queueprocessor:0.1.0.19
           env:
           - name:  ASPNETCORE_ENVIRONMENT
             value: Development
+          - name:  ASPNETCORE_URLS
+            value: http://+:81
           - name:  Orders_Queue_Name
             value: orders-kubernetes
           - name:  ServiceBus_ConnectionString
@@ -112,3 +128,4 @@ type: Opaque
 data:
   ServiceBus_ConnectionString: RW5kcG9pbnQ9c2I6Ly9jb250YWluby5zZXJ2aWNlYnVzLndpbmRvd3MubmV0LztTaGFyZWRBY2Nlc3NLZXlOYW1lPUNvbnRhaW5lcnM7U2hhcmVkQWNjZXNzS2V5PThLNlhRVnJxbk1ZcXlwNGdCdmRYOTJRS21YM2JQUStLS2NGekFxaTkyR009
   TableStorage_ConnectionString: RGVmYXVsdEVuZHBvaW50c1Byb3RvY29sPWh0dHBzO0FjY291bnROYW1lPWNvbnRhaW5vO0FjY291bnRLZXk9aHYwRlZtRFQrNDNGcnlEODlXZmt5Q0NxK3JnamhtZEFKZHpQekpMb1NaTEhNaGFBc2VaeDR3aVJCS2w0dTJPZlY1R0lOSWpxQVE3S00ycjV5ODUxdHc9PTtCbG9iRW5kcG9pbnQ9aHR0cHM6Ly9jb250YWluby5ibG9iLmNvcmUud2luZG93cy5uZXQvO1F1ZXVlRW5kcG9pbnQ9aHR0cHM6Ly9jb250YWluby5xdWV1ZS5jb3JlLndpbmRvd3MubmV0LztUYWJsZUVuZHBvaW50PWh0dHBzOi8vY29udGFpbm8udGFibGUuY29yZS53aW5kb3dzLm5ldC87RmlsZUVuZHBvaW50PWh0dHBzOi8vY29udGFpbm8uZmlsZS5jb3JlLndpbmRvd3MubmV0Lzs=
+  Redis_ConnectionString: Y29udGFpbm8ucmVkaXMuY2FjaGUud2luZG93cy5uZXQ6NjM4MCxwYXNzd29yZD12Qk1ZNlhland2OGcwQ0w4QzFBRWREK3BBcEJpV0RrQVdtTG9EbDMwWnNVPSxzc2w9VHJ1ZSxhYm9ydENvbm5lY3Q9RmFsc2U=
