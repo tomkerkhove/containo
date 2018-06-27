@@ -8,9 +8,3 @@ A service can have multiple **code packages** which are basically Docker contain
 ![Service Fabric Mesh](./../media/docs/service-fabric-mesh-composition.png)
 
 The API service is part of a **network** which is exposing the API to the internet. To achive this, the service defines an endpoint with its internal port which is referenced in the network configuration and assigns a public port to leverage port forwarding.
-
-----------------------------
-
-:rotating_light: _This scenario runs a Redis instance in the same service as the API. While this might seem perfect, they have different scaling needs and you should not do this but in this scenario I'm using this to indicate how you can run multiple containers in one service._
-
-----------------------------
