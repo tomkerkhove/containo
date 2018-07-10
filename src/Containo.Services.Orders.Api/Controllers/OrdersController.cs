@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using Containo.Services.Orders.Storage.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
+using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Containo.Services.Orders.Api.Controllers
@@ -59,7 +61,7 @@ namespace Containo.Services.Orders.Api.Controllers
         [SwaggerResponse((int)HttpStatusCode.BadRequest, description: "Order was not valid")]
         [SwaggerResponse((int)HttpStatusCode.Created, description: "Information about the order",
             type: typeof(OrderConfirmation))]
-        public async Task<IActionResult> Post([FromBody] OrderRequest orderRequest)
+        public async Task<IActionResult> Post([FromBody, Required] OrderRequest orderRequest)
         {
             var isValidOrder = await orderValidationService.ValidateAsync(orderRequest);
             if (isValidOrder == false)
