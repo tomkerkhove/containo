@@ -28,6 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Swashbuckle.AspNetCore.Annotations">
+      <HintPath>..\..\..\..\..\Users\tkerkhove\.nuget\packages\swashbuckle.aspnetcore.annotations\3.0.0\lib\netstandard1.6\Swashbuckle.AspNetCore.Annotations.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Docs\Open-Api.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
