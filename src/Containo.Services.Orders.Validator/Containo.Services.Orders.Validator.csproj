@@ -15,7 +15,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Containo.Core.Api\Containo.Core.Api.csproj" />
     <ProjectReference Include="..\Containo.Core.Api\Containo.Core.Api.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Swashbuckle.AspNetCore.Annotations">
+      <HintPath>..\..\..\..\..\Users\tkerkhove\.nuget\packages\swashbuckle.aspnetcore.annotations\3.0.0\lib\netstandard1.6\Swashbuckle.AspNetCore.Annotations.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
