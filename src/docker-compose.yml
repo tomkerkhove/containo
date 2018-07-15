@@ -16,3 +16,5 @@ services:
     build:
       context: .
       dockerfile: Containo.Services.Orders.Validator/Dockerfile
+  containo.services.orders.cache:
+    image: redis

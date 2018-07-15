@@ -14,7 +14,7 @@ services:
       - TableStorage_ConnectionString=<secret>
       - ServiceBus_ConnectionString=<secret>
       - Orders_Queue_Name=local-orders
-      - Redis_ConnectionString=<secret>
+      - Redis_ConnectionString=localhost:6379
     ports:
       - "80"
   containo.services.orders.validator:
