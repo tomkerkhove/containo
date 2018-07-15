@@ -49,12 +49,6 @@
                 "description": "Connection string to Azure Storage"
             }
         },
-        "Redis.ConnectionString": {
-            "type": "securestring",
-            "metadata": {
-                "description": "Connection string to a Redis Cluster"
-            }
-        },
         "Region": {
             "type": "string",
             "defaultValue": "eastus",
@@ -132,7 +126,7 @@
                                         },
                                         {
                                             "name": "Redis_ConnectionString",
-                                            "value": "[parameters('Redis.ConnectionString')]"
+                                            "value": "localhost:6379"
                                         },
                                         {
                                             "name": "Services_Validation_Url",
@@ -173,6 +167,31 @@
                                 {
                                     "name": "[resourceId('Microsoft.ServiceFabric/networks', parameters('Application.Network.Name'))]"
                                 }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Containo.Orders.Cache",
+                        "properties": {
+                            "description": "Redis cache for the orders service",
+                            "osType": "linux",
+                            "codePackages": [
+                                {
+                                    "name": "Redis",
+                                    "image": "redis",
+                                    "endpoints": [],
+                                    "environmentVariables": [],
+                                    "resources": {
+                                        "requests": {
+                                            "cpu": 1,
+                                            "memoryInGB": 1
+                                        }
+                                    }
+                                }
+                            ],
+                            "replicaCount": 1,
+                            "networkRefs": [
+                                {}
                             ]
                         }
                     },
