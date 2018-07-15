@@ -9,7 +9,7 @@ steps:
   inputs:
     kubernetesServiceConnection: Containo
     namespace: containo
-    arguments: '-f "$(System.DefaultWorkingDirectory)\deploy\orders-declaration-kubernetes.yaml"'
+    arguments: '-f "$(System.DefaultWorkingDirectory)\deploy\kubernetes\kubernetes-orders-declaration.yaml"'
     outputFormat: yaml
 
 

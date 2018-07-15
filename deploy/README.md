@@ -2,8 +2,8 @@
 This documentation describes how you can use the deployment declarations to deploy Containo on Kubernetes & Service Fabric Mesh.
 
 In order to achieve this, you can create builds based on the YAML templates that are provided:
-- `orders-declaration-kubernetes.yaml` - **Deploys Containo on a Kubernetes cluster.**
-- `orders-declaration-service-fabric-mesh.json` - **Deploys Containo on Azure Service Fabric Mesh via Azure Resource Management.**
+- `kubernetes\kubernetes-orders-declaration.yaml` - **Deploys Containo on a Kubernetes cluster.**
+- `service-fabric-mesh\service-fabric-mesh-orders-declaration.json` - **Deploys Containo on Azure Service Fabric Mesh via Azure Resource Management.**
 
 ## Deploying Containo on a Kubernetes cluster
 Before you can deploy to a Kubernetes cluster you will have to:
@@ -16,7 +16,7 @@ When you want to use your own container registry, you need to:
 
 You can either deploy to a Kubernetes cluster via a [VSTS build](./../build/README.md#deploying-containo-on-a-kubernetes-cluster) or via `kubectl`:
 ```
-kubectl apply -f orders-declaration-kubernetes.yaml --namespace="<your-namespace>"
+kubectl apply -f kubernetes\kubernetes-orders-declaration.yaml --namespace="<your-namespace>"
 ```
 
 ## Deploying Containo on Azure Service Fabric Mesh
