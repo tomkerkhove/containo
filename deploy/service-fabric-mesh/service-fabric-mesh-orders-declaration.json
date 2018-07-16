@@ -59,9 +59,9 @@
     },
     "resources": [
         {
-            "apiVersion": "2018-03-01-privatepreview",
+            "apiVersion": "2018-07-01-preview",
             "name": "[parameters('Application.Network.Name')]",
-            "type": "Microsoft.ServiceFabric/networks",
+            "type": "Microsoft.ServiceFabricMesh/networks",
             "location": "[parameters('Region')]",
             "dependsOn": [],
             "properties": {
@@ -81,9 +81,9 @@
             }
         },
         {
-            "apiVersion": "2018-03-01-privatepreview",
+            "apiVersion": "2018-07-01-preview",
             "name": "[parameters('Application.Name')]",
-            "type": "Microsoft.ServiceFabric/applications",
+            "type": "Microsoft.ServiceFabricMesh/applications",
             "location": "[parameters('Region')]",
             "properties": {
                 "description": "[parameters('Application.Description')]",
@@ -165,7 +165,7 @@
                             "replicaCount": 1,
                             "networkRefs": [
                                 {
-                                    "name": "[resourceId('Microsoft.ServiceFabric/networks', parameters('Application.Network.Name'))]"
+                                    "name": "[resourceId('Microsoft.ServiceFabricMesh/networks', parameters('Application.Network.Name'))]"
                                 }
                             ]
                         }
