@@ -21,7 +21,6 @@ kubectl apply -f kubernetes\kubernetes-orders-declaration.yaml --namespace="<you
 
 ## Deploying Containo on Azure Service Fabric Mesh
 Before you can deploy to Azure Service Fabric Mesh you will have to:
-- Change the YAML template to use the correct `azureSubscription`, `resourceGroupName` & `location`
 - Configure the connection string to Service Bus in a variable named `Orders_ServiceBus_ConnectionString`
 - Configure the connection string to Azure Storage in a variable named `Orders_TableStorage_ConnectionString`
 - Configure the connection string to Redis in a variable named `Orders_Redis_ConnectionString`
@@ -33,3 +32,9 @@ You can either deploy to Azure Service Fabric Mesh via a [VSTS build](./../build
 ```
 az mesh deployment create --resource-group containo-apps --template-uri <uri-to-declaration>
 ```
+
+--------------------------------------------------------------------
+
+:warning: _Currently there are issues when deploying Azure Service Fabric Mesh applications with parameterized name via ARM. It is best to change the template and hardcode the application name and update the port forwarding_
+
+--------------------------------------------------------------------
