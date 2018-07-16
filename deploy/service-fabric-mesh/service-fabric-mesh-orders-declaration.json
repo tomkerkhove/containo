@@ -102,7 +102,7 @@
                             "codePackages": [
                                 {
                                     "name": "Containo.Orders.API",
-                                    "image": "tomkerkhove/containo.services.orders.api:0.1.0.19",
+                                    "image": "tomkerkhove/containo.services.orders.api:0.1.0.25",
                                     "endpoints": [
                                         {
                                             "name": "HTTP-Public-APIs-Orders",
@@ -148,7 +148,7 @@
                                 },
                                 {
                                     "name": "Containo.Orders.Validator",
-                                    "image": "tomkerkhove/containo.services.orders.validator:0.1.0.19",
+                                    "image": "tomkerkhove/containo.services.orders.validator:0.1.0.25",
                                     "endpoints": [],
                                     "environmentVariables": [
                                         {
@@ -184,7 +184,7 @@
                             "codePackages": [
                                 {
                                     "name": "Containo.Orders.QueueProcessor",
-                                    "image": "tomkerkhove/containo.services.orders.queueprocessor:0.1.0.19",
+                                    "image": "tomkerkhove/containo.services.orders.queueprocessor:0.1.0.25",
                                     "endpoints": [],
                                     "environmentVariables": [
                                         {
