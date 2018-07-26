@@ -4,7 +4,7 @@
     "parameters": {
         "Application.Name": {
             "type": "string",
-            "defaultValue": "Containo.Orders",
+            "defaultValue": "Containo-Orders",
             "metadata": {
                 "description": "Name of the Service Fabric Application"
             }
@@ -25,7 +25,7 @@
         },
         "Application.Network.Name": {
             "type": "string",
-            "defaultValue": "Containo.Network.Public",
+            "defaultValue": "Containo-Networks-Public",
             "metadata": {
                 "description": "Name of network to use in which your Service Fabric Application will be"
             }
@@ -79,7 +79,7 @@
                         {
                             "publicPort": "1337",
                             "applicationName": "[parameters('Application.Name')]",
-                            "serviceName": "Containo.Orders.API",
+                            "serviceName": "Containo-Orders-API",
                             "endpointName": "HTTP-Public-APIs-Orders"
                         }
                     ]
@@ -95,13 +95,13 @@
                 "description": "[parameters('Application.Description')]",
                 "services": [
                     {
-                        "name": "Containo.Orders.API",
+                        "name": "Containo-Orders-API",
                         "properties": {
                             "description": "Containo Orders API",
                             "osType": "linux",
                             "codePackages": [
                                 {
-                                    "name": "Containo.Orders.API",
+                                    "name": "Containo-Orders-API-Host",
                                     "image": "tomkerkhove/containo.services.orders.api:0.1.0.25",
                                     "endpoints": [
                                         {
@@ -147,7 +147,7 @@
                                     }
                                 },
                                 {
-                                    "name": "Containo.Orders.Validator",
+                                    "name": "Containo-Orders-Validator",
                                     "image": "tomkerkhove/containo.services.orders.validator:0.1.0.25",
                                     "endpoints": [],
                                     "environmentVariables": [
@@ -177,13 +177,13 @@
                         }
                     },
                     {
-                        "name": "Containo.Orders.QueueProcessor",
+                        "name": "Containo-Orders-QueueProcessor",
                         "properties": {
                             "description": "Queue processor that will handle the order messages",
                             "osType": "linux",
                             "codePackages": [
                                 {
-                                    "name": "Containo.Orders.QueueProcessor",
+                                    "name": "Containo-Orders-QueueProcessor-Host",
                                     "image": "tomkerkhove/containo.services.orders.queueprocessor:0.1.0.25",
                                     "endpoints": [],
                                     "environmentVariables": [
