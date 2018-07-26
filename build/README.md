@@ -8,6 +8,8 @@ In order to achieve this, you can create builds based on the YAML templates that
 
 These are natively supported by VSTS which is documented [here](https://docs.microsoft.com/en-us/vsts/pipelines/build/yaml?view=vsts#manually-create-a-yaml-build-definition).
 
+I'm currently using VSTS for this as well which you can find [here](https://tomkerkhove.visualstudio.com/Containo).
+
 ----------------------------
 
 :rotating_light: _Currently I'm using builds to release to Kubernetes & Service Fabric Mesh given I only have 1 environment. In the real world, you should be using a release pipeline instead but the same concepts can be used._
