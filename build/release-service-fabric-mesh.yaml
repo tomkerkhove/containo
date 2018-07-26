@@ -11,4 +11,4 @@ steps:
     resourceGroupName: 'containo-apps'
     location: 'East US'
     csmFile: 'deploy/service-fabric-mesh/service-fabric-mesh-orders-declaration.json'
-    overrideParameters: '-Application.Name "Containo.Orders" -Application.Description "Application that is used to create orders" -Application.Environment "Development" -Application.Network.Name "Containo.Network" -Application.Queues.Name "orders-service-fabric-mesh" -ServiceBus.ConnectionString $(Orders_ServiceBus_ConnectionString) -TableStorage.ConnectionString $(Orders_TableStorage_ConnectionString) -Redis.ConnectionString $(Orders_Redis_ConnectionString) -Region "eastus"'
+    overrideParameters: '-Application.Name "Containo.Orders" -Application.Description "Application that is used to create orders" -Application.Environment "Development" -Application.Network.Name "Containo.Network" -Application.Queues.Name "orders-service-fabric-mesh" -ServiceBus.ConnectionString $(Orders_ServiceBus_ConnectionString) -TableStorage.ConnectionString $(Orders_TableStorage_ConnectionString) -Region "eastus"'
