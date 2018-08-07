@@ -51,7 +51,7 @@
         },
         "Region": {
             "type": "string",
-            "defaultValue": "eastus",
+            "defaultValue": "[resourceGroup().location]",
             "metadata": {
                 "description": "Region in which the resources will be deployed"
             }
