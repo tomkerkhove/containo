@@ -13,10 +13,19 @@ namespace Containo.Services.Orders.Storage.Repositories
 
         public OrdersRepository()
         {
-            var connectionString = Environment.GetEnvironmentVariable(variable: "TableStorage_ConnectionString");
-            var storageAccount = CloudStorageAccount.Parse(connectionString);
-            var tableStorageClient = storageAccount.CreateCloudTableClient();
-            ordersTable = tableStorageClient.GetTableReference(tableName: "Orders");
+            var connectionString = string.Empty;
+            try
+            {
+                connectionString = Environment.GetEnvironmentVariable(variable: "TableStorage_ConnectionString");
+                Console.WriteLine($"Storage connection string: {connectionString}");
+                var storageAccount = CloudStorageAccount.Parse(connectionString);
+                var tableStorageClient = storageAccount.CreateCloudTableClient();
+                ordersTable = tableStorageClient.GetTableReference(tableName: "Orders");
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException($"Connection string - {connectionString}", ex);
+            }
         }
 
         /// <summary>
