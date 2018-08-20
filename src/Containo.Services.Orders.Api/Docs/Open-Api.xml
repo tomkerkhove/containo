@@ -4,6 +4,12 @@
         <name>Containo.Services.Orders.Api</name>
     </assembly>
     <members>
+        <member name="M:Containo.Services.Orders.Api.Controllers.EnvironmentController.Get(System.String)">
+            <summary>
+                Provides information about the environment
+            </summary>
+            <param name="environmentVariableName">Name of the environment variable that you are interested in</param>
+        </member>
         <member name="M:Containo.Services.Orders.Api.Controllers.OrdersController.Get(System.String,System.String)">
             <summary>
                 Provides details about an order that was made
