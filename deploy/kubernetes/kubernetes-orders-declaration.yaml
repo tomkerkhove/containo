@@ -78,7 +78,7 @@ spec:
         type: platform
     spec:
       containers:
-        - name: containo-orders-api
+        - name: containo-orders-queueprocessor
           image: tomkerkhove/containo.services.orders.queueprocessor:0.1.0.30
           env:
           - name:  ASPNETCORE_ENVIRONMENT
