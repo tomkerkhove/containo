@@ -96,7 +96,7 @@
                             "codePackages": [
                                 {
                                     "name": "Containo-Orders-API-Host",
-                                    "image": "tomkerkhove/containo.services.orders.api:0.1.0.30",
+                                    "image": "tomkerkhove/containo.services.orders.api:0.1.31",
                                     "endpoints": [
                                         {
                                             "name": "HTTP-Public-APIs-Orders",
@@ -142,7 +142,7 @@
                                 },
                                 {
                                     "name": "Containo-Orders-Validator",
-                                    "image": "tomkerkhove/containo.services.orders.validator:0.1.0.30",
+                                    "image": "tomkerkhove/containo.services.orders.validator:0.1.31",
                                     "endpoints": [],
                                     "environmentVariables": [
                                         {
@@ -205,7 +205,7 @@
                             "codePackages": [
                                 {
                                     "name": "Containo-Orders-QueueProcessor-Host",
-                                    "image": "tomkerkhove/containo.services.orders.queueprocessor:0.1.0.30",
+                                    "image": "tomkerkhove/containo.services.orders.queueprocessor:0.1.31",
                                     "endpoints": [],
                                     "environmentVariables": [
                                         {
@@ -234,9 +234,7 @@
                                 }
                             ],
                             "replicaCount": 1,
-                            "networkRefs": [
-                                {}
-                            ]
+                            "networkRefs": []
                         }
                     }
                 ]

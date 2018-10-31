@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: containo-orders-api
-          image: tomkerkhove/containo.services.orders.api:0.1.0.30
+          image: tomkerkhove/containo.services.orders.api:0.1.31
           ports:
           - containerPort: 80
           env:
@@ -45,7 +45,7 @@ spec:
                 name: containo-orders
                 key: TableStorage_ConnectionString
         - name: containo-orders-api-validator
-          image: tomkerkhove/containo.services.orders.validator:0.1.0.30
+          image: tomkerkhove/containo.services.orders.validator:0.1.31
           ports:
           - containerPort: 81
           env:
@@ -100,7 +100,7 @@ spec:
     spec:
       containers:
         - name: containo-orders-queueprocessor
-          image: tomkerkhove/containo.services.orders.queueprocessor:0.1.0.30
+          image: tomkerkhove/containo.services.orders.queueprocessor:0.1.31
           env:
           - name:  ASPNETCORE_ENVIRONMENT
             value: Development
