@@ -11,4 +11,6 @@ Unfortunately Kuberenetes does not have the concept of "an application" which re
 
 Another interesting aspect is that every entity is also capable of providing metadata about itself by assinging **labels**. In our scenario every entity is deployed in a dedicated namespace and has at least the following labels - `app`, `microservice`, `service`, `type`.
 
-By using a **service** we can expose our API to the internet. This entity is using the labels that we have assigned to forward traffic to the internal port of the container inside the pod by using port forwarding.
+By using a **service** we can expose our API to the internet. This entity is using the labels that we have assigned to forward traffic to the internal port of the container inside the pod by using port forwarding. Given we want to expose this outside of the cluster, the type of the service is `LoadBalancer` which the routing.
+
+We're also running a Redis cache Pod which has service linked to it. This allows the pod to open up a port for other pods to communicate with it, in our case the API. Given this is only for local communication we use the default `ClusterIP` service type with port forwarding.
