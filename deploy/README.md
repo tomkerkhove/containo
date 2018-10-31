@@ -9,7 +9,6 @@ In order to achieve this, you can create builds based on the YAML templates that
 Before you can deploy to a Kubernetes cluster you will have to:
 - Create a secret and assign it to the `ServiceBus_ConnectionString` secret ([docs](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret-manually))
 - Create a secret and assign it to the `TableStorage_ConnectionString` secret ([docs](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret-manually))
-- Create a secret and assign it to the `Redis_ConnectionString` secret ([docs](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret-manually))
 
 When you want to use your own container registry, you need to:
 - Update the declaration to use the images from your registry
@@ -23,7 +22,6 @@ kubectl apply -f kubernetes\kubernetes-orders-declaration.yaml --namespace="<you
 Before you can deploy to Azure Service Fabric Mesh you will have to:
 - Configure the connection string to Service Bus in a variable named `Orders_ServiceBus_ConnectionString`
 - Configure the connection string to Azure Storage in a variable named `Orders_TableStorage_ConnectionString`
-- Configure the connection string to Redis in a variable named `Orders_Redis_ConnectionString`
 
 When you want to use your own container registry, you need to:
 - Update the declaration to use the images from your registry
