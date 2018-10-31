@@ -33,10 +33,7 @@ spec:
           - name: Services_Validation_Url
             value: http://localhost:81
           - name:  Redis_ConnectionString
-            valueFrom:
-              secretKeyRef:
-                name: containo-orders
-                key: Redis_ConnectionString
+            value: containo-orders-cache-service:6666
           - name:  ServiceBus_ConnectionString
             valueFrom:
               secretKeyRef:
@@ -56,6 +53,30 @@ spec:
             value: Development
           - name:  ASPNETCORE_URLS
             value: http://+:81
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: containo-orders-cache
+  namespace: containo
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: containo
+        microservice: orders
+        service: cache
+        type: infrastructure
+    spec:
+      containers:
+        - name: containo-orders-cache
+          image: redis:4.0.11
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -101,6 +122,27 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: containo-orders-cache-service
+  namespace: containo
+  labels:
+    app: containo
+    microservice: orders
+    service: cache
+    type: infrastructure
+spec:
+  selector:
+    app: containo
+    microservice: orders
+    service: cache
+    type: infrastructure
+  ports:
+  - protocol: TCP
+    port: 6666
+    targetPort: 6379
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: containo-orders-frontend
   namespace: containo
   labels:
@@ -128,4 +170,3 @@ type: Opaque
 data:
   ServiceBus_ConnectionString: RW5kcG9pbnQ9c2I6Ly9jb250YWluby5zZXJ2aWNlYnVzLndpbmRvd3MubmV0LztTaGFyZWRBY2Nlc3NLZXlOYW1lPUNvbnRhaW5lcnM7U2hhcmVkQWNjZXNzS2V5PThLNlhRVnJxbk1ZcXlwNGdCdmRYOTJRS21YM2JQUStLS2NGekFxaTkyR009
   TableStorage_ConnectionString: RGVmYXVsdEVuZHBvaW50c1Byb3RvY29sPWh0dHBzO0FjY291bnROYW1lPWNvbnRhaW5vO0FjY291bnRLZXk9aHYwRlZtRFQrNDNGcnlEODlXZmt5Q0NxK3JnamhtZEFKZHpQekpMb1NaTEhNaGFBc2VaeDR3aVJCS2w0dTJPZlY1R0lOSWpxQVE3S00ycjV5ODUxdHc9PTtCbG9iRW5kcG9pbnQ9aHR0cHM6Ly9jb250YWluby5ibG9iLmNvcmUud2luZG93cy5uZXQvO1F1ZXVlRW5kcG9pbnQ9aHR0cHM6Ly9jb250YWluby5xdWV1ZS5jb3JlLndpbmRvd3MubmV0LztUYWJsZUVuZHBvaW50PWh0dHBzOi8vY29udGFpbm8udGFibGUuY29yZS53aW5kb3dzLm5ldC87RmlsZUVuZHBvaW50PWh0dHBzOi8vY29udGFpbm8uZmlsZS5jb3JlLndpbmRvd3MubmV0Lzs=
-  Redis_ConnectionString: Y29udGFpbm8ucmVkaXMuY2FjaGUud2luZG93cy5uZXQ6NjM4MCxwYXNzd29yZD12Qk1ZNlhland2OGcwQ0w4QzFBRWREK3BBcEJpV0RrQVdtTG9EbDMwWnNVPSxzc2w9VHJ1ZSxhYm9ydENvbm5lY3Q9RmFsc2U=
