@@ -8,6 +8,12 @@ The company is running their platform on Docker containers written in .NET Core.
 
 ![.NET Core](./media/dotnet.png)![Docker](./media/docker-logo.png)![Kong](./media/kong-logo.png)![Kubernetes](./media/kubernetes-logo.png)![Azure Service Fabric Mesh](./media/service-fabric-mesh-logo.png)
 
+----------------------------
+
+:loudspeaker: This project is not dead, I just have some other priorities for the moment.
+
+----------------------------
+
 ## Scenario
 Containo provides an e-commerce SaaS platform where vendors can signup to become a vendor to sell products from the marketplace.
 Customers can sign up and order products from either Containo itself or one of their trusted vendors.
