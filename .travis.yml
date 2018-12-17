@@ -1,6 +1,6 @@
 language: csharp
-dotnet: 2.1.403
-dist: trusty
+dotnet: 2.2.100
+dist: xenial
 script:
 - dotnet restore src/Containo.sln
 - dotnet build src/Containo.sln -c Travis-CI
